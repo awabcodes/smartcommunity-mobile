@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Plugins } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+
+const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -11,18 +12,13 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     private translate: TranslateService
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+    SplashScreen.hide();
     this.initTranslate();
   }
 

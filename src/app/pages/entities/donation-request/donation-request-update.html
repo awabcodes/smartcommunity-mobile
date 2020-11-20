@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Donation Request
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!isReadyToSave" (click)="save()" color="primary">
+        <span *ngIf="platform.is('ios')">{{'DONE_BUTTON' | translate}}</span>
+        <ion-icon name="checkmark" *ngIf="!platform.is('ios')"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
+    <ion-list>
+      <ion-item [hidden]="!form.id">
+        <ion-label>ID</ion-label>
+        <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cause</ion-label>
+        <ion-input type="text" name="cause" formControlName="cause"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Payment Info</ion-label>
+        <ion-input type="text" name="paymentInfo" formControlName="paymentInfo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Info</ion-label>
+        <ion-input type="text" name="info" formControlName="info"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Total Amount</ion-label>
+        <ion-input type="number" name="totalAmount" formControlName="totalAmount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contact</ion-label>
+        <ion-input type="text" name="contact" formControlName="contact"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Amount Raised</ion-label>
+        <ion-input type="number" name="amountRaised" formControlName="amountRaised"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

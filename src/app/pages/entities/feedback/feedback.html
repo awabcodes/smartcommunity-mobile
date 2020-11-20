@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Feedbacks
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- todo: add elasticsearch support -->
+<ion-content class="ion-padding">
+  <ion-refresher [disabled]="plt.is('desktop')" slot="fixed" (ionRefresh)="loadAll($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let feedback of feedbacks; trackBy: trackId" #slidingItem>
+      <ion-item (click)="view(feedback)">
+        <ion-label text-wrap>
+          <ion-text color="primary"><h2>{{feedback.title}}</h2></ion-text>
+          <p>{{feedback.content}}</p>
+          <!-- todo: special handling for translating enum - {{'FeedbackType.' + feedback.type}}" -->
+          <p>{{feedback.type}}</p>
+          <!-- todo: special handling for translating enum - {{'FeedbackStatus.' + feedback.status}}" -->
+          <p>{{feedback.status}}</p>
+          <p>{{feedback.creationDate | date:'medium'}}</p>
+          <ion-avatar *ngIf="feedback.image">
+            <img [src]="'data:' + feedback.imageContentType + ';base64,' + feedback.image" />
+          </ion-avatar>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="primary" (click)="edit(slidingItem, feedback)">
+          {{ 'EDIT_BUTTON' | translate }}
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="delete(feedback)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-item *ngIf="!feedbacks?.length">
+    <ion-label>
+      No Feedbacks found.
+    </ion-label>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="new()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Donation Request
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Cause</ion-label>
+      <div item-content>
+        <span>{{donationRequest.cause}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Payment Info</ion-label>
+      <div item-content>
+        <span>{{donationRequest.paymentInfo}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Info</ion-label>
+      <div item-content>
+        <span>{{donationRequest.info}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Total Amount</ion-label>
+      <div item-content>
+        <span>{{donationRequest.totalAmount}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Contact</ion-label>
+      <div item-content>
+        <span>{{donationRequest.contact}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Amount Raised</ion-label>
+      <div item-content>
+        <span>{{donationRequest.amountRaised}}</span>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(donationRequest)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(donationRequest)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

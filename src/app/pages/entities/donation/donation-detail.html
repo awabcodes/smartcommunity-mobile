@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Donation
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Amount</ion-label>
+      <div item-content>
+        <span>{{donation.amount}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Receipt Number</ion-label>
+      <div item-content>
+        <span>{{donation.receiptNumber}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label>User</ion-label>
+      <div item-content>{{donation.userLogin}}</div>
+    </ion-item>
+    <ion-item>
+      <ion-label>Request</ion-label>
+      <div item-content *ngIf="donation.requestId">
+        <a>{{donation.requestCause}}</a>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(donation)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(donation)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

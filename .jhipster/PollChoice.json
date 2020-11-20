@@ -1,0 +1,39 @@
+{
+  "name": "PollChoice",
+  "fields": [
+    {
+      "fieldName": "choice",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "vote",
+      "otherEntityRelationshipName": "choice",
+      "relationshipName": "votes"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "poll",
+      "otherEntityRelationshipName": "choices",
+      "relationshipValidateRules": "required",
+      "relationshipName": "poll",
+      "otherEntityField": "question"
+    }
+  ],
+  "changelogDate": "20201119180230",
+  "entityTableName": "poll_choice",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

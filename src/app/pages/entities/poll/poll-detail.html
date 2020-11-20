@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Poll
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="fixed">Question</ion-label>
+      <div item-content>
+        <span>{{poll.question}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Active</ion-label>
+      <div item-content>
+        <span>{{poll.active}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Created By</ion-label>
+      <div item-content>
+        <span>{{poll.createdBy}}</span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Creation Date</ion-label>
+      <div item-content>
+        <span>{{poll.creationDate | date:'medium'}}</span>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="primary" (click)="open(poll)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(poll)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+</ion-content>

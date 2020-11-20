@@ -1,0 +1,106 @@
+
+enum AnnouncementType {
+	NEWS, EVENT, OTHER
+}
+
+entity Announcement {
+	title String required maxlength(20)
+    content String required
+    creationDate Instant required
+    type AnnouncementType required
+    location String
+    image ImageBlob maxbytes(1024)
+    contact String
+    announcementDate Instant
+}
+
+entity Need {
+	name String required
+    info String required
+    available Boolean required
+    contact String required
+    image ImageBlob maxbytes(1024)
+	quantity String
+}
+
+entity NeedOrder {
+    // Need
+    // User
+    quantity String required
+    note String
+}
+
+enum FeedbackType {
+	NEGATIVE, POSITIVE
+}
+
+enum FeedbackStatus {
+	OPEN, CLOSED
+}
+
+entity Feedback {
+	// User
+	title String required maxlength(20)
+    content String required
+    type FeedbackType required
+    status FeedbackStatus required
+    creationDate Instant required
+    image ImageBlob maxbytes(1024)
+}
+
+entity DonationRequest {
+	cause String required
+    paymentInfo String required
+    info String required
+    totalAmount Double required
+    contact String required
+    amountRaised Double
+}
+
+entity Donation {
+	// User
+    // DonationRequest
+    amount Double required
+    receiptNumber String
+}
+
+entity Poll {
+	question String required
+    active Boolean required
+    createdBy String required
+    creationDate Instant required
+    // PollChoices
+}
+
+entity PollChoice {
+	choice String required
+    // Poll
+    // Votes
+}
+
+entity Vote {
+	creationDate Instant required
+	// User
+    // Poll
+    // PollChoice
+}
+
+relationship OneToMany {
+	DonationRequest{donations(amount)} to Donation{request(cause) required}
+    Need{orders} to NeedOrder{need(name) required}
+    Poll{choices required} to PollChoice{poll(question) required}
+    PollChoice{votes} to Vote{choice(choice) required}
+}
+
+relationship ManyToOne {
+	Feedback{user(login) required} to User
+    NeedOrder{user(login) required} to User
+    Donation{user(login) required} to User
+    Vote{user(login) required} to User
+}
+
+paginate all with pagination
+
+dto * with mapstruct
+
+service all with serviceClass

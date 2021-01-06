@@ -19,7 +19,7 @@
 <ion-content class="ion-padding">
   <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
     <ion-list>
-      <ion-item [hidden]="!form.id">
+      <ion-item [hidden]="!form.value.id">
         <ion-label>ID</ion-label>
         <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
       </ion-item>
@@ -35,13 +35,13 @@
         <ion-label>User</ion-label>
         <ion-select id="field_user" formControlName="userId" [compareWith]="compareUser" required>
           <ion-select-option *ngIf="!form.value.userId" [value]="null" selected></ion-select-option>
-          <ion-select-option [value]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById"
-            >{{userOption.login}}</ion-select-option
-          >
+          <ion-select-option [value]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">
+            {{userOption.login}}
+          </ion-select-option>
         </ion-select>
       </ion-item>
-      <div [hidden]="!(form.controls.?.dirty && form.controls.?.invalid)">
-        <small [hidden]="!form.controls.?.errors?.required">
+      <div [hidden]="!(form.controls.userId?.dirty && form.controls.userId?.invalid)">
+        <small [hidden]="!form.controls.userId?.errors?.required">
           This field is required.
         </small>
       </div>
@@ -49,15 +49,13 @@
         <ion-label>Request</ion-label>
         <ion-select id="field_request" formControlName="requestId" [compareWith]="compareDonationRequest" required>
           <ion-select-option *ngIf="!form.value.requestId" [value]="null" selected></ion-select-option>
-          <ion-select-option
-            [value]="donationRequestOption.id"
-            *ngFor="let donationRequestOption of donationRequests; trackBy: trackDonationRequestById"
-            >{{donationRequestOption.cause}}</ion-select-option
-          >
+          <ion-select-option [value]="donationRequestOption.id"
+            *ngFor="let donationRequestOption of donationRequests; trackBy: trackDonationRequestById">
+            {{donationRequestOption.cause}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <div [hidden]="!(form.controls.?.dirty && form.controls.?.invalid)">
-        <small [hidden]="!form.controls.?.errors?.required">
+      <div [hidden]="!(form.controls.requestId?.dirty && form.controls.requestId?.invalid)">
+        <small [hidden]="!form.controls.requestId?.errors?.required">
           This field is required.
         </small>
       </div>

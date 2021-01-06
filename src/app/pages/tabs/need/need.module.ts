@@ -11,12 +11,11 @@ import { HttpResponse } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 
 import { NeedPage } from './need';
-import { NeedUpdatePage } from './need-update';
 import { Need, NeedService, NeedDetailPage } from '.';
 
 @Injectable({ providedIn: 'root' })
 export class NeedResolve implements Resolve<Need> {
-  constructor(private service: NeedService) {}
+  constructor(private service: NeedService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Need> {
     const id = route.params.id ? route.params.id : null;
@@ -40,30 +39,8 @@ const routes: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new',
-    component: NeedUpdatePage,
-    resolve: {
-      data: NeedResolve,
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
     path: ':id/view',
     component: NeedDetailPage,
-    resolve: {
-      data: NeedResolve,
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/edit',
-    component: NeedUpdatePage,
     resolve: {
       data: NeedResolve,
     },
@@ -75,8 +52,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [NeedPage, NeedUpdatePage, NeedDetailPage],
+  declarations: [NeedPage, NeedDetailPage],
   imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes)],
   providers: [Camera],
 })
-export class NeedPageModule {}
+export class NeedPageModule { }

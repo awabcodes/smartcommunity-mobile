@@ -11,12 +11,11 @@ import { HttpResponse } from '@angular/common/http';
 import { filter, map } from 'rxjs/operators';
 
 import { AnnouncementPage } from './announcement';
-import { AnnouncementUpdatePage } from './announcement-update';
 import { Announcement, AnnouncementService, AnnouncementDetailPage } from '.';
 
 @Injectable({ providedIn: 'root' })
 export class AnnouncementResolve implements Resolve<Announcement> {
-  constructor(private service: AnnouncementService) {}
+  constructor(private service: AnnouncementService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Announcement> {
     const id = route.params.id ? route.params.id : null;
@@ -40,30 +39,8 @@ const routes: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new',
-    component: AnnouncementUpdatePage,
-    resolve: {
-      data: AnnouncementResolve,
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
     path: ':id/view',
     component: AnnouncementDetailPage,
-    resolve: {
-      data: AnnouncementResolve,
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/edit',
-    component: AnnouncementUpdatePage,
     resolve: {
       data: AnnouncementResolve,
     },
@@ -75,8 +52,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AnnouncementPage, AnnouncementUpdatePage, AnnouncementDetailPage],
+  declarations: [AnnouncementPage, AnnouncementDetailPage],
   imports: [IonicModule, FormsModule, ReactiveFormsModule, CommonModule, TranslateModule, RouterModule.forChild(routes)],
   providers: [Camera],
 })
-export class AnnouncementPageModule {}
+export class AnnouncementPageModule { }

@@ -6,6 +6,12 @@
     <ion-title>
       Announcements
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" id="logout">
+        {{ 'LOGOUT_TITLE' | translate }}
+        <ion-icon slot="end" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +25,9 @@
     <ion-item-sliding *ngFor="let announcement of announcements; trackBy: trackId" #slidingItem>
       <ion-item (click)="view(announcement)">
         <ion-label text-wrap>
-          <ion-text color="primary"><h2>{{announcement.title}}</h2></ion-text>
+          <ion-text color="primary">
+            <h2>{{announcement.title}}</h2>
+          </ion-text>
           <p>{{announcement.content}}</p>
           <p>{{announcement.creationDate | date:'medium'}}</p>
           <!-- todo: special handling for translating enum - {{'AnnouncementType.' + announcement.type}}" -->

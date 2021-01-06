@@ -8,42 +8,51 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home',
-        children: [
-          {
-            path: '',
-            loadChildren: '../home/home.module#HomePageModule',
-          },
-        ],
+        path: 'announcement',
+        loadChildren: './announcement/announcement.module#AnnouncementPageModule',
       },
       {
-        path: 'entities',
-        children: [
-          {
-            path: '',
-            loadChildren: '../entities/entities.module#EntitiesPageModule',
-          },
-        ],
+        path: 'need',
+        loadChildren: './need/need.module#NeedPageModule',
       },
       {
-        path: 'account',
-        children: [
-          {
-            path: '',
-            loadChildren: '../account/account.module#AccountPageModule',
-          },
-        ],
+        path: 'need-order',
+        loadChildren: './need-order/need-order.module#NeedOrderPageModule',
+      },
+      {
+        path: 'feedback',
+        loadChildren: './feedback/feedback.module#FeedbackPageModule',
+      },
+      {
+        path: 'donation-request',
+        loadChildren: './donation-request/donation-request.module#DonationRequestPageModule',
+      },
+      {
+        path: 'donation',
+        loadChildren: './donation/donation.module#DonationPageModule',
+      },
+      {
+        path: 'poll',
+        loadChildren: './poll/poll.module#PollPageModule',
+      },
+      {
+        path: 'poll-choice',
+        loadChildren: './poll-choice/poll-choice.module#PollChoicePageModule',
+      },
+      {
+        path: 'vote',
+        loadChildren: './vote/vote.module#VotePageModule',
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/announcement',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/announcement',
     pathMatch: 'full',
   },
 ];
@@ -52,4 +61,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

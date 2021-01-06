@@ -5,6 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { JhiDataUtils } from 'ng-jhipster';
 import { Announcement } from './announcement.model';
 import { AnnouncementService } from './announcement.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'page-announcement',
@@ -20,7 +21,8 @@ export class AnnouncementPage {
     private navController: NavController,
     private announcementService: AnnouncementService,
     private toastCtrl: ToastController,
-    public plt: Platform
+    public plt: Platform,
+    private loginService: LoginService
   ) {
     this.announcements = [];
   }
@@ -88,4 +90,14 @@ export class AnnouncementPage {
   view(announcement: Announcement) {
     this.navController.navigateForward('/tabs/entities/announcement/' + announcement.id + '/view');
   }
+
+  logout() {
+    this.loginService.logout();
+    this.goBackToHomePage();
+  }
+
+  private goBackToHomePage(): void {
+    this.navController.navigateBack('');
+  }
+
 }

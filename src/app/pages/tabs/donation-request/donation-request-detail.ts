@@ -25,7 +25,7 @@ export class DonationRequestDetailPage implements OnInit {
   }
 
   open(item: DonationRequest) {
-    this.navController.navigateForward('/tabs/entities/donation-request/' + item.id + '/edit');
+    this.navController.navigateForward('/tabs/donation-request/' + item.id + '/edit');
   }
 
   async deleteModal(item: DonationRequest) {
@@ -41,7 +41,7 @@ export class DonationRequestDetailPage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.donationRequestService.delete(item.id).subscribe(() => {
-              this.navController.navigateForward('/tabs/entities/donation-request');
+              this.navController.navigateForward('/tabs/donation-request');
             });
           },
         },

@@ -83,7 +83,7 @@ export class PollUpdatePage implements OnInit {
     this.isSaving = false;
     const toast = await this.toastCtrl.create({ message: `Poll ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
-    this.navController.navigateBack('/tabs/entities/poll');
+    this.navController.navigateBack('/tabs/poll');
   }
 
   previousState() {

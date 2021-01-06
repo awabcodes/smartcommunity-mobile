@@ -25,7 +25,7 @@ export class VoteDetailPage implements OnInit {
   }
 
   open(item: Vote) {
-    this.navController.navigateForward('/tabs/entities/vote/' + item.id + '/edit');
+    this.navController.navigateForward('/tabs/vote/' + item.id + '/edit');
   }
 
   async deleteModal(item: Vote) {
@@ -41,7 +41,7 @@ export class VoteDetailPage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.voteService.delete(item.id).subscribe(() => {
-              this.navController.navigateForward('/tabs/entities/vote');
+              this.navController.navigateForward('/tabs/vote');
             });
           },
         },

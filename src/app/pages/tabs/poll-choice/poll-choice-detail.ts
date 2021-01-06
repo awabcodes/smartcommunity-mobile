@@ -25,7 +25,7 @@ export class PollChoiceDetailPage implements OnInit {
   }
 
   open(item: PollChoice) {
-    this.navController.navigateForward('/tabs/entities/poll-choice/' + item.id + '/edit');
+    this.navController.navigateForward('/tabs/poll-choice/' + item.id + '/edit');
   }
 
   async deleteModal(item: PollChoice) {
@@ -41,7 +41,7 @@ export class PollChoiceDetailPage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.pollChoiceService.delete(item.id).subscribe(() => {
-              this.navController.navigateForward('/tabs/entities/poll-choice');
+              this.navController.navigateForward('/tabs/poll-choice');
             });
           },
         },

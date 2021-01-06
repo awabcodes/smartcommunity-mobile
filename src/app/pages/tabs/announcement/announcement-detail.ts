@@ -27,7 +27,7 @@ export class AnnouncementDetailPage implements OnInit {
   }
 
   open(item: Announcement) {
-    this.navController.navigateForward('/tabs/entities/announcement/' + item.id + '/edit');
+    this.navController.navigateForward('/tabs/announcement/' + item.id + '/edit');
   }
 
   async deleteModal(item: Announcement) {
@@ -43,7 +43,7 @@ export class AnnouncementDetailPage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.announcementService.delete(item.id).subscribe(() => {
-              this.navController.navigateForward('/tabs/entities/announcement');
+              this.navController.navigateForward('/tabs/announcement');
             });
           },
         },

@@ -56,11 +56,11 @@ export class PollChoicePage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/poll-choice/new');
+    this.navController.navigateForward('/tabs/poll-choice/new');
   }
 
   edit(item: IonItemSliding, pollChoice: PollChoice) {
-    this.navController.navigateForward('/tabs/entities/poll-choice/' + pollChoice.id + '/edit');
+    this.navController.navigateForward('/tabs/poll-choice/' + pollChoice.id + '/edit');
     item.close();
   }
 
@@ -76,6 +76,6 @@ export class PollChoicePage {
   }
 
   view(pollChoice: PollChoice) {
-    this.navController.navigateForward('/tabs/entities/poll-choice/' + pollChoice.id + '/view');
+    this.navController.navigateForward('/tabs/poll-choice/' + pollChoice.id + '/view');
   }
 }

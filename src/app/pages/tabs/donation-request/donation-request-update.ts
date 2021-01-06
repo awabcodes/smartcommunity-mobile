@@ -86,7 +86,7 @@ export class DonationRequestUpdatePage implements OnInit {
     this.isSaving = false;
     const toast = await this.toastCtrl.create({ message: `DonationRequest ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
-    this.navController.navigateBack('/tabs/entities/donation-request');
+    this.navController.navigateBack('/tabs/donation-request');
   }
 
   previousState() {

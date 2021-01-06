@@ -66,11 +66,11 @@ export class NeedPage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/need/new');
+    this.navController.navigateForward('/tabs/need/new');
   }
 
   edit(item: IonItemSliding, need: Need) {
-    this.navController.navigateForward('/tabs/entities/need/' + need.id + '/edit');
+    this.navController.navigateForward('/tabs/need/' + need.id + '/edit');
     item.close();
   }
 
@@ -86,6 +86,6 @@ export class NeedPage {
   }
 
   view(need: Need) {
-    this.navController.navigateForward('/tabs/entities/need/' + need.id + '/view');
+    this.navController.navigateForward('/tabs/need/' + need.id + '/view');
   }
 }

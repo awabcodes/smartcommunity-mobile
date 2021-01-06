@@ -68,11 +68,11 @@ export class AnnouncementPage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/announcement/new');
+    this.navController.navigateForward('/tabs/announcement/new');
   }
 
   edit(item: IonItemSliding, announcement: Announcement) {
-    this.navController.navigateForward('/tabs/entities/announcement/' + announcement.id + '/edit');
+    this.navController.navigateForward('/tabs/announcement/' + announcement.id + '/edit');
     item.close();
   }
 
@@ -88,7 +88,7 @@ export class AnnouncementPage {
   }
 
   view(announcement: Announcement) {
-    this.navController.navigateForward('/tabs/entities/announcement/' + announcement.id + '/view');
+    this.navController.navigateForward('/tabs/announcement/' + announcement.id + '/view');
   }
 
   logout() {

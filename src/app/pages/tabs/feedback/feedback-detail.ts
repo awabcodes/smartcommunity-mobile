@@ -27,7 +27,7 @@ export class FeedbackDetailPage implements OnInit {
   }
 
   open(item: Feedback) {
-    this.navController.navigateForward('/tabs/entities/feedback/' + item.id + '/edit');
+    this.navController.navigateForward('/tabs/feedback/' + item.id + '/edit');
   }
 
   async deleteModal(item: Feedback) {
@@ -43,7 +43,7 @@ export class FeedbackDetailPage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.feedbackService.delete(item.id).subscribe(() => {
-              this.navController.navigateForward('/tabs/entities/feedback');
+              this.navController.navigateForward('/tabs/feedback');
             });
           },
         },

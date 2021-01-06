@@ -98,7 +98,7 @@ export class VoteUpdatePage implements OnInit {
     this.isSaving = false;
     const toast = await this.toastCtrl.create({ message: `Vote ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
-    this.navController.navigateBack('/tabs/entities/vote');
+    this.navController.navigateBack('/tabs/vote');
   }
 
   previousState() {

@@ -56,11 +56,11 @@ export class DonationRequestPage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/donation-request/new');
+    this.navController.navigateForward('/tabs/donation-request/new');
   }
 
   edit(item: IonItemSliding, donationRequest: DonationRequest) {
-    this.navController.navigateForward('/tabs/entities/donation-request/' + donationRequest.id + '/edit');
+    this.navController.navigateForward('/tabs/donation-request/' + donationRequest.id + '/edit');
     item.close();
   }
 
@@ -76,6 +76,6 @@ export class DonationRequestPage {
   }
 
   view(donationRequest: DonationRequest) {
-    this.navController.navigateForward('/tabs/entities/donation-request/' + donationRequest.id + '/view');
+    this.navController.navigateForward('/tabs/donation-request/' + donationRequest.id + '/view');
   }
 }

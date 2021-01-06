@@ -19,7 +19,9 @@
     <ion-item-sliding *ngFor="let need of needs; trackBy: trackId" #slidingItem>
       <ion-item (click)="view(need)">
         <ion-label text-wrap>
-          <ion-text color="primary"><h2>{{need.name}}</h2></ion-text>
+          <ion-text color="primary">
+            <h2>{{need.name}}</h2>
+          </ion-text>
           <p>{{need.info}}</p>
           <p>{{need.available}}</p>
           <p>{{need.contact}}</p>
@@ -45,9 +47,4 @@
     </ion-label>
   </ion-item>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="new()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

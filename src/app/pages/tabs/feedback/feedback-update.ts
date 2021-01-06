@@ -120,7 +120,7 @@ export class FeedbackUpdatePage implements OnInit {
     this.isSaving = false;
     const toast = await this.toastCtrl.create({ message: `Feedback ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
-    this.navController.navigateBack('/tabs/entities/feedback');
+    this.navController.navigateBack('/tabs/feedback');
   }
 
   previousState() {

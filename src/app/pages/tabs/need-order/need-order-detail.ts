@@ -25,7 +25,7 @@ export class NeedOrderDetailPage implements OnInit {
   }
 
   open(item: NeedOrder) {
-    this.navController.navigateForward('/tabs/entities/need-order/' + item.id + '/edit');
+    this.navController.navigateForward('/tabs/need-order/' + item.id + '/edit');
   }
 
   async deleteModal(item: NeedOrder) {
@@ -41,7 +41,7 @@ export class NeedOrderDetailPage implements OnInit {
           text: 'Delete',
           handler: () => {
             this.needOrderService.delete(item.id).subscribe(() => {
-              this.navController.navigateForward('/tabs/entities/need-order');
+              this.navController.navigateForward('/tabs/need-order');
             });
           },
         },

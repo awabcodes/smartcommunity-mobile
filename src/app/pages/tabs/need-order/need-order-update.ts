@@ -99,7 +99,7 @@ export class NeedOrderUpdatePage implements OnInit {
     this.isSaving = false;
     const toast = await this.toastCtrl.create({ message: `NeedOrder ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
-    this.navController.navigateBack('/tabs/entities/need-order');
+    this.navController.navigateBack('/tabs/need-order');
   }
 
   previousState() {

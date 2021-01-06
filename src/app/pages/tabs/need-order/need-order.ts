@@ -56,11 +56,11 @@ export class NeedOrderPage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/need-order/new');
+    this.navController.navigateForward('/tabs/need-order/new');
   }
 
   edit(item: IonItemSliding, needOrder: NeedOrder) {
-    this.navController.navigateForward('/tabs/entities/need-order/' + needOrder.id + '/edit');
+    this.navController.navigateForward('/tabs/need-order/' + needOrder.id + '/edit');
     item.close();
   }
 
@@ -76,6 +76,6 @@ export class NeedOrderPage {
   }
 
   view(needOrder: NeedOrder) {
-    this.navController.navigateForward('/tabs/entities/need-order/' + needOrder.id + '/view');
+    this.navController.navigateForward('/tabs/need-order/' + needOrder.id + '/view');
   }
 }

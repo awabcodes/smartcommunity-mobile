@@ -56,11 +56,11 @@ export class PollPage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/poll/new');
+    this.navController.navigateForward('/tabs/poll/new');
   }
 
   edit(item: IonItemSliding, poll: Poll) {
-    this.navController.navigateForward('/tabs/entities/poll/' + poll.id + '/edit');
+    this.navController.navigateForward('/tabs/poll/' + poll.id + '/edit');
     item.close();
   }
 
@@ -76,6 +76,6 @@ export class PollPage {
   }
 
   view(poll: Poll) {
-    this.navController.navigateForward('/tabs/entities/poll/' + poll.id + '/view');
+    this.navController.navigateForward('/tabs/poll/' + poll.id + '/view');
   }
 }

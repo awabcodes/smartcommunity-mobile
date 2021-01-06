@@ -56,11 +56,11 @@ export class VotePage {
   }
 
   new() {
-    this.navController.navigateForward('/tabs/entities/vote/new');
+    this.navController.navigateForward('/tabs/vote/new');
   }
 
   edit(item: IonItemSliding, vote: Vote) {
-    this.navController.navigateForward('/tabs/entities/vote/' + vote.id + '/edit');
+    this.navController.navigateForward('/tabs/vote/' + vote.id + '/edit');
     item.close();
   }
 
@@ -76,6 +76,6 @@ export class VotePage {
   }
 
   view(vote: Vote) {
-    this.navController.navigateForward('/tabs/entities/vote/' + vote.id + '/view');
+    this.navController.navigateForward('/tabs/vote/' + vote.id + '/view');
   }
 }

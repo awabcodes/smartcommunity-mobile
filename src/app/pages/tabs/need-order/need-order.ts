@@ -29,7 +29,7 @@ export class NeedOrderPage {
 
   async loadAll(refresher?) {
     this.needOrderService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<NeedOrder[]>) => res.ok),
         map((res: HttpResponse<NeedOrder[]>) => res.body)

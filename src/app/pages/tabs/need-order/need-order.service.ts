@@ -4,10 +4,13 @@ import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api/api.service';
 import { createRequestOption } from 'src/app/shared';
 import { NeedOrder } from './need-order.model';
+import { Need } from '../need/need.model';
 
 @Injectable({ providedIn: 'root' })
 export class NeedOrderService {
   private resourceUrl = ApiService.API_URL + '/need-orders';
+
+  need: Need;
 
   constructor(protected http: HttpClient) {}
 

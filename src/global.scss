@@ -24,3 +24,22 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--ion-color-medium);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--ion-color-medium);
+}
+
+.available {
+    border-top: 10px solid var(--ion-color-success);
+}
+
+.not-available {
+    border-top: 10px solid var(--ion-color-danger);
+}

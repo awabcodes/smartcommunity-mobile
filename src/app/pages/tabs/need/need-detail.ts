@@ -4,6 +4,7 @@ import { Need } from './need.model';
 import { NeedService } from './need.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { NeedOrderService } from '../need-order';
 
 @Component({
   selector: 'page-need-detail',
@@ -17,8 +18,9 @@ export class NeedDetailPage implements OnInit {
     private navController: NavController,
     private needService: NeedService,
     private activatedRoute: ActivatedRoute,
-    private alertController: AlertController
-  ) {}
+    private alertController: AlertController,
+    private needOrderService: NeedOrderService
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((response) => {
@@ -58,5 +60,10 @@ export class NeedDetailPage implements OnInit {
 
   openFile(contentType, field) {
     return this.dataUtils.openFile(contentType, field);
+  }
+
+  order() {
+    this.needOrderService.need = this.need;
+    this.navController.navigateForward('/tabs/need-order/new');
   }
 }

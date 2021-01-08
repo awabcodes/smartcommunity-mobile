@@ -12,6 +12,12 @@
 <ion-content class="ion-padding">
   <ion-list>
     <ion-item>
+      <ion-label>Need</ion-label>
+      <div item-content *ngIf="needOrder.needId">
+        <a>{{needOrder.needName}}</a>
+      </div>
+    </ion-item>
+    <ion-item>
       <ion-label position="fixed">Quantity</ion-label>
       <div item-content>
         <span>{{needOrder.quantity}}</span>
@@ -23,18 +29,8 @@
         <span>{{needOrder.note}}</span>
       </div>
     </ion-item>
-    <ion-item>
-      <ion-label>User</ion-label>
-      <div item-content>{{needOrder.userLogin}}</div>
-    </ion-item>
-    <ion-item>
-      <ion-label>Need</ion-label>
-      <div item-content *ngIf="needOrder.needId">
-        <a>{{needOrder.needName}}</a>
-      </div>
-    </ion-item>
   </ion-list>
 
-  <ion-button expand="block" color="primary" (click)="open(needOrder)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
-  <ion-button expand="block" color="danger" (click)="deleteModal(needOrder)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+  <ion-button expand="block" color="danger" (click)="deleteModal(needOrder)">{{ 'DELETE_BUTTON' | translate }}
+  </ion-button>
 </ion-content>

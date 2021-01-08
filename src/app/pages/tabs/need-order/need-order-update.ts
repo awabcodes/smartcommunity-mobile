@@ -6,9 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { NeedOrder } from './need-order.model';
 import { NeedOrderService } from './need-order.service';
-import { User } from '../../../services/user/user.model';
-import { UserService } from '../../../services/user/user.service';
-import { Need, NeedService } from '../need';
+import { Need } from '../need';
+import { Account } from 'src/model/account.model';
+import { AccountService } from 'src/app/services/auth/account.service';
 
 @Component({
   selector: 'page-need-order-update',
@@ -16,8 +16,8 @@ import { Need, NeedService } from '../need';
 })
 export class NeedOrderUpdatePage implements OnInit {
   needOrder: NeedOrder;
-  users: User[];
-  needs: Need[];
+  need: Need;
+  account: Account;
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
@@ -25,9 +25,7 @@ export class NeedOrderUpdatePage implements OnInit {
   form = this.formBuilder.group({
     id: [],
     quantity: [null, [Validators.required]],
-    note: [null, []],
-    userId: [null, [Validators.required]],
-    needId: [null, [Validators.required]],
+    note: [null, []]
   });
 
   constructor(
@@ -36,8 +34,7 @@ export class NeedOrderUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
-    private userService: UserService,
-    private needService: NeedService,
+    private accountService: AccountService,
     private needOrderService: NeedOrderService
   ) {
     // Watch the form for changes, and
@@ -46,42 +43,18 @@ export class NeedOrderUpdatePage implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.userService.findAll().subscribe(
-      (data) => (this.users = data),
-      (error) => this.onError(error)
-    );
-    this.needService.query().subscribe(
-      (data) => {
-        this.needs = data.body;
-      },
-      (error) => this.onError(error)
-    );
-    this.activatedRoute.data.subscribe((response) => {
-      this.needOrder = response.data;
-      this.isNew = this.needOrder.id === null || this.needOrder.id === undefined;
-      this.updateForm(this.needOrder);
-    });
-  }
+  ngOnInit() { }
 
-  updateForm(needOrder: NeedOrder) {
-    this.form.patchValue({
-      id: needOrder.id,
-      quantity: needOrder.quantity,
-      note: needOrder.note,
-      userId: needOrder.userId,
-      needId: needOrder.needId,
-    });
+  ionViewWillEnter() {
+    this.need = this.needOrderService.need;
+    this.accountService.identity().then((account) => this.account = account)
   }
 
   save() {
     this.isSaving = true;
     const needOrder = this.createFromForm();
-    if (!this.isNew) {
-      this.subscribeToSaveResponse(this.needOrderService.update(needOrder));
-    } else {
-      this.subscribeToSaveResponse(this.needOrderService.create(needOrder));
-    }
+
+    this.subscribeToSaveResponse(this.needOrderService.create(needOrder));
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<NeedOrder>>) {
@@ -119,23 +92,8 @@ export class NeedOrderUpdatePage implements OnInit {
       id: this.form.get(['id']).value,
       quantity: this.form.get(['quantity']).value,
       note: this.form.get(['note']).value,
-      userId: this.form.get(['userId']).value,
-      needId: this.form.get(['needId']).value,
+      userId: this.account.id,
+      needId: this.need.id,
     };
-  }
-
-  compareUser(first: User, second: User): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackUserById(index: number, item: User) {
-    return item.id;
-  }
-  compareNeed(first: Need, second: Need): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackNeedById(index: number, item: Need) {
-    return item.id;
   }
 }

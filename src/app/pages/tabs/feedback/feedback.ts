@@ -31,7 +31,7 @@ export class FeedbackPage {
 
   async loadAll(refresher?) {
     this.feedbackService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<Feedback[]>) => res.ok),
         map((res: HttpResponse<Feedback[]>) => res.body)

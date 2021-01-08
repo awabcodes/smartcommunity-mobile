@@ -51,7 +51,7 @@ export class VoteUpdatePage implements OnInit {
       (data) => (this.users = data),
       (error) => this.onError(error)
     );
-    this.pollChoiceService.query().subscribe(
+    this.pollChoiceService.query({ size: 999999, sort: ['id,desc'] }).subscribe(
       (data) => {
         this.pollChoices = data.body;
       },

@@ -33,7 +33,7 @@ export class AnnouncementPage {
 
   async loadAll(refresher?) {
     this.announcementService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<Announcement[]>) => res.ok),
         map((res: HttpResponse<Announcement[]>) => res.body)

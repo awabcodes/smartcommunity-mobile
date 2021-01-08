@@ -29,7 +29,7 @@ export class VotePage {
 
   async loadAll(refresher?) {
     this.voteService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<Vote[]>) => res.ok),
         map((res: HttpResponse<Vote[]>) => res.body)

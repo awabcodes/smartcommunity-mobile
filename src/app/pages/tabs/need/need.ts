@@ -31,7 +31,7 @@ export class NeedPage {
 
   async loadAll(refresher?) {
     this.needService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<Need[]>) => res.ok),
         map((res: HttpResponse<Need[]>) => res.body)

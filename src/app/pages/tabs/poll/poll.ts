@@ -29,7 +29,7 @@ export class PollPage {
 
   async loadAll(refresher?) {
     this.pollService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<Poll[]>) => res.ok),
         map((res: HttpResponse<Poll[]>) => res.body)

@@ -41,7 +41,7 @@ export class PollChoiceUpdatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.pollService.query().subscribe(
+    this.pollService.query({ size: 999999, sort: ['id,desc'] }).subscribe(
       (data) => {
         this.polls = data.body;
       },

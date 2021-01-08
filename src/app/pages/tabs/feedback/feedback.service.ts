@@ -28,6 +28,11 @@ export class FeedbackService {
     return this.http.get<Feedback[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryByUser(req?: any): Observable<HttpResponse<Feedback[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<Feedback[]>(this.resourceUrl + '/user', { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

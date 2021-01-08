@@ -45,8 +45,11 @@ export class DonationUpdatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.donationRequest = this.donationService.donationRequest;
 
+  }
+
+  ionViewWillEnter() {
+    this.donationRequest = this.donationService.donationRequest;
     this.accountService.identity().then(
       (data) => (this.account = data),
       (error) => this.onError(error)

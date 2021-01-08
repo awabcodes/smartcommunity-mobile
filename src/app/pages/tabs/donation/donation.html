@@ -15,10 +15,12 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngFor="let donation of donations; trackBy: trackId" #slidingItem>
+  <ion-card *ngFor="let donation of donations; trackBy: trackId" [ngClass]="donation.collected ? 'available' : 'not-available'">
     <ion-item (click)="view(donation)">
       <ion-label text-wrap>
-        <h3>{{donation.requestCause}}</h3>
+        <ion-text color="primary">
+          <h2>{{donation.requestCause}}</h2>
+        </ion-text>
         <ion-badge>{{donation.amount}} SDG</ion-badge>
         <p>{{donation.receiptNumber}}</p>
       </ion-label>

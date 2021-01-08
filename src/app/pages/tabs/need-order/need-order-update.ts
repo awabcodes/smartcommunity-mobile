@@ -43,11 +43,16 @@ export class NeedOrderUpdatePage implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
   ionViewWillEnter() {
     this.need = this.needOrderService.need;
-    this.accountService.identity().then((account) => this.account = account)
+    this.accountService.identity().then(
+      (data) => (this.account = data),
+      (error) => this.onError(error)
+    );
   }
 
   save() {

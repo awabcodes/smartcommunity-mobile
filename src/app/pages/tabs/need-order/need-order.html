@@ -18,7 +18,9 @@
   <ion-card *ngFor="let needOrder of needOrders; trackBy: trackId">
     <ion-item (click)="view(needOrder)">
       <ion-label text-wrap>
-        <h4>{{needOrder.needName}}</h4>
+        <ion-text color="primary">
+          <h2>{{needOrder.needName}}</h2>
+        </ion-text>
         <p>{{needOrder.quantity}}</p>
         <p>{{needOrder.note}}</p>
       </ion-label>

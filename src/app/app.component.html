@@ -9,6 +9,12 @@
     <ion-content>
       <ion-list lines="none">
         <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/tabs/announcement" routerLinkActive="active" routerDirection="root">
+            <ion-icon color="primary" slot="start" name="home"></ion-icon> {{'Home' | translate}}
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/tabs/need-order" routerLinkActive="active" routerDirection="root">
             <ion-icon color="primary" slot="start" name="bag-check"></ion-icon> {{'Orders' | translate}}
           </ion-item>

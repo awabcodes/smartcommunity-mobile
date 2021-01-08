@@ -10,6 +10,7 @@ export class DonationRequest implements BaseEntity {
     public totalAmount?: number,
     public contact?: string,
     public amountRaised?: number,
-    public donations?: Donation[]
-  ) {}
+    public donations?: Donation[],
+    public available?: boolean,
+  ) { }
 }

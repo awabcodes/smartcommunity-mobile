@@ -8,6 +8,7 @@ export class Donation implements BaseEntity {
     public userLogin?: string,
     public userId?: number,
     public requestCause?: string,
-    public requestId?: number
-  ) {}
+    public requestId?: number,
+    public collected?: boolean,
+  ) { }
 }

@@ -11,6 +11,12 @@
 
 <ion-content class="ion-padding">
   <ion-list>
+    <div *ngIf="feedback.image">
+      <a (click)="openFile(feedback.imageContentType, feedback.image)">
+        <img [src]="'data:' + feedback.imageContentType + ';base64,' + feedback.image" style="max-width: 100%;"
+          alt="feedback image" />
+      </a>
+    </div>
     <ion-item>
       <ion-label position="fixed">Title</ion-label>
       <div item-content>
@@ -41,23 +47,6 @@
         <span>{{feedback.creationDate | date:'medium'}}</span>
       </div>
     </ion-item>
-    <ion-item>
-      <ion-label position="fixed">Image</ion-label>
-      <div item-content>
-        <div *ngIf="feedback.image">
-          <a (click)="openFile(feedback.imageContentType, feedback.image)">
-            <img [src]="'data:' + feedback.imageContentType + ';base64,' + feedback.image" style="max-width: 100%;" alt="feedback image" />
-          </a>
-          {{feedback.imageContentType}}, {{byteSize(feedback.image)}}
-        </div>
-      </div>
-    </ion-item>
-    <ion-item>
-      <ion-label>User</ion-label>
-      <div item-content>{{feedback.userLogin}}</div>
-    </ion-item>
   </ion-list>
 
-  <ion-button expand="block" color="primary" (click)="open(feedback)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
-  <ion-button expand="block" color="danger" (click)="deleteModal(feedback)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
 </ion-content>

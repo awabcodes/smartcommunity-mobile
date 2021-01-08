@@ -6,23 +6,12 @@
     <ion-title>
       Feedback
     </ion-title>
-
-    <ion-buttons slot="end">
-      <ion-button [disabled]="!isReadyToSave" (click)="save()" color="primary">
-        <span *ngIf="platform.is('ios')">{{'DONE_BUTTON' | translate}}</span>
-        <ion-icon name="checkmark" *ngIf="!platform.is('ios')"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form *ngIf="form" name="form" [formGroup]="form" (ngSubmit)="save()">
+  <form *ngIf="form" name="form" [formGroup]="form">
     <ion-list>
-      <ion-item [hidden]="!form.value.id">
-        <ion-label>ID</ion-label>
-        <ion-input type="hidden" id="id" formControlName="id" readonly></ion-input>
-      </ion-item>
       <ion-item>
         <ion-label position="floating">Title</ion-label>
         <ion-input type="text" name="title" formControlName="title"></ion-input>
@@ -34,56 +23,34 @@
       <ion-item>
         <ion-label>Type</ion-label>
         <ion-select formControlName="type" id="field_type" required>
-          <ion-select-option value="NEGATIVE">{{'FeedbackType.NEGATIVE' | translate}}</ion-select-option>
-          <ion-select-option value="POSITIVE">{{'FeedbackType.POSITIVE' | translate}}</ion-select-option>
+          <ion-select-option value="NEGATIVE">{{'Negative' | translate}}</ion-select-option>
+          <ion-select-option value="POSITIVE">{{'Positive' | translate}}</ion-select-option>
         </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Status</ion-label>
-        <ion-select formControlName="status" id="field_status" required>
-          <ion-select-option value="OPEN">{{'FeedbackStatus.OPEN' | translate}}</ion-select-option>
-          <ion-select-option value="CLOSED">{{'FeedbackStatus.CLOSED' | translate}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Creation Date</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" formControlName="creationDate" id="field_creationDate"></ion-datetime>
       </ion-item>
       <ion-item>
         <div>
-          <img
-            [src]="'data:' + feedback.imageContentType + ';base64,' + feedback.image"
-            style="max-height: 100px;"
-            *ngIf="feedback?.image"
-            alt="feedback image"
-          />
+          <img [src]="'data:' + feedback.imageContentType + ';base64,' + feedback.image" style="max-height: 100px;"
+            *ngIf="feedback?.image" alt="feedback image" />
           <div *ngIf="feedback.image">
-            <p>{{feedback.imageContentType}}, {{byteSize(feedback.image)}}</p>
             <ion-button color="danger" (click)="clearInputImage('image', 'imageContentType', 'fileImage')">
               <ion-icon name="trash" slot="icon-only"></ion-icon>
             </ion-button>
           </div>
-          <input type="file" #fileInput style="display: none;" (change)="setFileData($event, 'image', true)" accept="image/*" />
+          <input type="file" #fileInput style="display: none;" (change)="setFileData($event, 'image', true)"
+            accept="image/*" />
           <ion-button *ngIf="!feedback?.image" (click)="getPicture('image')">
             <ion-icon name="add-circle" slot="start"></ion-icon>
             {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
           </ion-button>
         </div>
       </ion-item>
-      <ion-item>
-        <ion-label>User</ion-label>
-        <ion-select id="field_user" formControlName="userId" [compareWith]="compareUser" required>
-          <ion-select-option *ngIf="!form.value.userId" [value]="null" selected></ion-select-option>
-          <ion-select-option [value]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById"
-            >{{userOption.login}}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-      <div [hidden]="!(form.controls.userId?.dirty && form.controls.userId?.invalid)">
-        <small [hidden]="!form.controls.userId?.errors?.required">
-          This field is required.
-        </small>
-      </div>
     </ion-list>
+
+    <div class="ion-text-center">
+      <ion-button [disabled]="!isReadyToSave" color="primary" (click)="save()">
+        <span *ngIf="platform.is('ios')">{{'DONE_BUTTON' | translate}}</span>
+        <ion-icon slot="start" name="checkmark" *ngIf="!platform.is('ios')"></ion-icon> {{'DONE_BUTTON' | translate}}
+      </ion-button>
+    </div>
   </form>
 </ion-content>

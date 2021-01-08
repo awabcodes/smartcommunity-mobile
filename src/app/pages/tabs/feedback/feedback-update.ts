@@ -6,10 +6,10 @@ import { NavController, Platform, ToastController } from '@ionic/angular';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Feedback } from './feedback.model';
+import { Feedback, FeedbackStatus } from './feedback.model';
 import { FeedbackService } from './feedback.service';
-import { User } from '../../../services/user/user.model';
-import { UserService } from '../../../services/user/user.service';
+import { Account } from 'src/model/account.model';
+import { AccountService } from 'src/app/services/auth/account.service';
 
 @Component({
   selector: 'page-feedback-update',
@@ -17,10 +17,9 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class FeedbackUpdatePage implements OnInit {
   feedback: Feedback;
-  users: User[];
+  account: Account;
   @ViewChild('fileInput', { static: false }) fileInput;
   cameraOptions: CameraOptions;
-  creationDate: string;
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
@@ -30,11 +29,8 @@ export class FeedbackUpdatePage implements OnInit {
     title: [null, [Validators.required]],
     content: [null, [Validators.required]],
     type: [null, [Validators.required]],
-    status: [null, [Validators.required]],
-    creationDate: [null, [Validators.required]],
     image: [null, []],
     imageContentType: [null, []],
-    userId: [null, [Validators.required]],
   });
 
   constructor(
@@ -47,9 +43,11 @@ export class FeedbackUpdatePage implements OnInit {
 
     private elementRef: ElementRef,
     private camera: Camera,
-    private userService: UserService,
+    private accountService: AccountService,
     private feedbackService: FeedbackService
   ) {
+    this.feedback = new Feedback();
+
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
       this.isReadyToSave = this.form.valid;
@@ -70,39 +68,17 @@ export class FeedbackUpdatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.findAll().subscribe(
-      (data) => (this.users = data),
+    this.accountService.identity().then(
+      (data) => (this.account = data),
       (error) => this.onError(error)
     );
-    this.activatedRoute.data.subscribe((response) => {
-      this.feedback = response.data;
-      this.isNew = this.feedback.id === null || this.feedback.id === undefined;
-      this.updateForm(this.feedback);
-    });
-  }
-
-  updateForm(feedback: Feedback) {
-    this.form.patchValue({
-      id: feedback.id,
-      title: feedback.title,
-      content: feedback.content,
-      type: feedback.type,
-      status: feedback.status,
-      creationDate: this.isNew ? new Date().toISOString() : feedback.creationDate,
-      image: feedback.image,
-      imageContentType: feedback.imageContentType,
-      userId: feedback.userId,
-    });
   }
 
   save() {
     this.isSaving = true;
     const feedback = this.createFromForm();
-    if (!this.isNew) {
-      this.subscribeToSaveResponse(this.feedbackService.update(feedback));
-    } else {
-      this.subscribeToSaveResponse(this.feedbackService.create(feedback));
-    }
+
+    this.subscribeToSaveResponse(this.feedbackService.create(feedback));
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<Feedback>>) {
@@ -141,11 +117,11 @@ export class FeedbackUpdatePage implements OnInit {
       title: this.form.get(['title']).value,
       content: this.form.get(['content']).value,
       type: this.form.get(['type']).value,
-      status: this.form.get(['status']).value,
-      creationDate: new Date(this.form.get(['creationDate']).value),
+      status: FeedbackStatus.OPEN,
+      creationDate: new Date(),
       image: this.form.get(['image']).value,
       imageContentType: this.form.get(['imageContentType']).value,
-      userId: this.form.get(['userId']).value,
+      userId: this.account.id,
     };
   }
 
@@ -199,12 +175,5 @@ export class FeedbackUpdatePage implements OnInit {
   clearInputImage(field: string, fieldContentType: string, idInput: string) {
     this.dataUtils.clearInputImage(this.feedback, this.elementRef, field, fieldContentType, idInput);
     this.form.patchValue({ [field]: '' });
-  }
-  compareUser(first: User, second: User): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackUserById(index: number, item: User) {
-    return item.id;
   }
 }

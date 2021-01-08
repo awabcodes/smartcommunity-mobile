@@ -4,13 +4,19 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Announcement
+      {{'Announcement' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-list>
+    <div *ngIf="announcement.image" class="ion-text-center">
+      <a (click)="openFile(announcement.imageContentType, announcement.image)">
+        <img [src]="'data:' + announcement.imageContentType + ';base64,' + announcement.image" style="max-width: 100%;"
+          alt="announcement image" />
+      </a>
+    </div>
     <ion-item>
       <ion-label position="fixed">Title</ion-label>
       <div item-content>
@@ -42,21 +48,6 @@
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="fixed">Image</ion-label>
-      <div item-content>
-        <div *ngIf="announcement.image">
-          <a (click)="openFile(announcement.imageContentType, announcement.image)">
-            <img
-              [src]="'data:' + announcement.imageContentType + ';base64,' + announcement.image"
-              style="max-width: 100%;"
-              alt="announcement image"
-            />
-          </a>
-          {{announcement.imageContentType}}, {{byteSize(announcement.image)}}
-        </div>
-      </div>
-    </ion-item>
-    <ion-item>
       <ion-label position="fixed">Contact</ion-label>
       <div item-content>
         <span>{{announcement.contact}}</span>
@@ -69,7 +60,4 @@
       </div>
     </ion-item>
   </ion-list>
-
-  <ion-button expand="block" color="primary" (click)="open(announcement)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
-  <ion-button expand="block" color="danger" (click)="deleteModal(announcement)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
 </ion-content>

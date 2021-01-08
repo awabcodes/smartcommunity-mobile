@@ -4,12 +4,15 @@ import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api/api.service';
 import { createRequestOption } from 'src/app/shared';
 import { Donation } from './donation.model';
+import { DonationRequest } from '../donation-request';
 
 @Injectable({ providedIn: 'root' })
 export class DonationService {
+  donationRequest: DonationRequest
+
   private resourceUrl = ApiService.API_URL + '/donations';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient) { }
 
   create(donation: Donation): Observable<HttpResponse<Donation>> {
     return this.http.post<Donation>(this.resourceUrl, donation, { observe: 'response' });

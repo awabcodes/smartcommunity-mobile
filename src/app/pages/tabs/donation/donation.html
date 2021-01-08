@@ -15,33 +15,20 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let donation of donations; trackBy: trackId" #slidingItem>
-      <ion-item (click)="view(donation)">
-        <ion-label text-wrap>
-          <p>{{donation.amount}}</p>
-          <p>{{donation.receiptNumber}}</p>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="primary" (click)="edit(slidingItem, donation)">
-          {{ 'EDIT_BUTTON' | translate }}
-        </ion-item-option>
-        <ion-item-option color="danger" (click)="delete(donation)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-card *ngFor="let donation of donations; trackBy: trackId" #slidingItem>
+    <ion-item (click)="view(donation)">
+      <ion-label text-wrap>
+        <h3>{{donation.requestCause}}</h3>
+        <ion-badge>{{donation.amount}} SDG</ion-badge>
+        <p>{{donation.receiptNumber}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
   <ion-item *ngIf="!donations?.length">
     <ion-label>
       No Donations found.
     </ion-label>
   </ion-item>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="new()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

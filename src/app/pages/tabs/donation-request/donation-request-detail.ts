@@ -3,6 +3,7 @@ import { DonationRequest } from './donation-request.model';
 import { DonationRequestService } from './donation-request.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { DonationService } from '../donation/donation.service';
 
 @Component({
   selector: 'page-donation-request-detail',
@@ -15,8 +16,9 @@ export class DonationRequestDetailPage implements OnInit {
     private navController: NavController,
     private donationRequestService: DonationRequestService,
     private activatedRoute: ActivatedRoute,
-    private alertController: AlertController
-  ) {}
+    private alertController: AlertController,
+    private donationService: DonationService
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((response) => {
@@ -48,5 +50,10 @@ export class DonationRequestDetailPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  donate() {
+    this.donationService.donationRequest = this.donationRequest;
+    this.navController.navigateForward('/tabs/donation/new');
   }
 }

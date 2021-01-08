@@ -6,9 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Donation } from './donation.model';
 import { DonationService } from './donation.service';
-import { User } from '../../../services/user/user.model';
-import { UserService } from '../../../services/user/user.service';
 import { DonationRequest, DonationRequestService } from '../donation-request';
+import { Account } from 'src/model/account.model';
+import { AccountService } from 'src/app/services/auth/account.service';
 
 @Component({
   selector: 'page-donation-update',
@@ -16,18 +16,16 @@ import { DonationRequest, DonationRequestService } from '../donation-request';
 })
 export class DonationUpdatePage implements OnInit {
   donation: Donation;
-  users: User[];
-  donationRequests: DonationRequest[];
+  account: Account;
+  donationRequest: DonationRequest;
   isSaving = false;
   isNew = true;
   isReadyToSave: boolean;
 
   form = this.formBuilder.group({
     id: [],
-    amount: [null, [Validators.required]],
+    amount: [null, [Validators.required, Validators.min(1)]],
     receiptNumber: [null, []],
-    userId: [null, [Validators.required]],
-    requestId: [null, [Validators.required]],
   });
 
   constructor(
@@ -36,7 +34,7 @@ export class DonationUpdatePage implements OnInit {
     protected formBuilder: FormBuilder,
     public platform: Platform,
     protected toastCtrl: ToastController,
-    private userService: UserService,
+    private accountService: AccountService,
     private donationRequestService: DonationRequestService,
     private donationService: DonationService
   ) {
@@ -47,41 +45,19 @@ export class DonationUpdatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.findAll().subscribe(
-      (data) => (this.users = data),
-      (error) => this.onError(error)
-    );
-    this.donationRequestService.query().subscribe(
-      (data) => {
-        this.donationRequests = data.body;
-      },
-      (error) => this.onError(error)
-    );
-    this.activatedRoute.data.subscribe((response) => {
-      this.donation = response.data;
-      this.isNew = this.donation.id === null || this.donation.id === undefined;
-      this.updateForm(this.donation);
-    });
-  }
+    this.donationRequest = this.donationService.donationRequest;
 
-  updateForm(donation: Donation) {
-    this.form.patchValue({
-      id: donation.id,
-      amount: donation.amount,
-      receiptNumber: donation.receiptNumber,
-      userId: donation.userId,
-      requestId: donation.requestId,
-    });
+    this.accountService.identity().then(
+      (data) => (this.account = data),
+      (error) => this.onError(error)
+    );
   }
 
   save() {
     this.isSaving = true;
     const donation = this.createFromForm();
-    if (!this.isNew) {
-      this.subscribeToSaveResponse(this.donationService.update(donation));
-    } else {
-      this.subscribeToSaveResponse(this.donationService.create(donation));
-    }
+
+    this.subscribeToSaveResponse(this.donationService.create(donation));
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<Donation>>) {
@@ -99,7 +75,15 @@ export class DonationUpdatePage implements OnInit {
     this.isSaving = false;
     const toast = await this.toastCtrl.create({ message: `Donation ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
-    this.navController.navigateBack('/tabs/donation');
+
+    this.updateAmountRaised(response.body.amount);
+
+    this.navController.navigateBack('/tabs/donation-request');
+  }
+
+  updateAmountRaised(amount: number) {
+    this.donationRequest.amountRaised += amount;
+    this.donationRequestService.update(this.donationRequest).subscribe();
   }
 
   previousState() {
@@ -119,23 +103,8 @@ export class DonationUpdatePage implements OnInit {
       id: this.form.get(['id']).value,
       amount: this.form.get(['amount']).value,
       receiptNumber: this.form.get(['receiptNumber']).value,
-      userId: this.form.get(['userId']).value,
-      requestId: this.form.get(['requestId']).value,
+      userId: this.account.id,
+      requestId: this.donationRequest.id,
     };
-  }
-
-  compareUser(first: User, second: User): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackUserById(index: number, item: User) {
-    return item.id;
-  }
-  compareDonationRequest(first: DonationRequest, second: DonationRequest): boolean {
-    return first && first.id && second && second.id ? first.id === second.id : first === second;
-  }
-
-  trackDonationRequestById(index: number, item: DonationRequest) {
-    return item.id;
   }
 }

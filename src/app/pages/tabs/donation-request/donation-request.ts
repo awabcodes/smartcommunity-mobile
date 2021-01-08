@@ -29,7 +29,7 @@ export class DonationRequestPage {
 
   async loadAll(refresher?) {
     this.donationRequestService
-      .query()
+      .query({ size: 999999, sort: ['id,desc'] })
       .pipe(
         filter((res: HttpResponse<DonationRequest[]>) => res.ok),
         map((res: HttpResponse<DonationRequest[]>) => res.body)

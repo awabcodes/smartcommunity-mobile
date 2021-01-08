@@ -30,25 +30,31 @@
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="fixed">Total Amount</ion-label>
-      <div item-content>
-        <span>{{donationRequest.totalAmount}}</span>
-      </div>
-    </ion-item>
-    <ion-item>
       <ion-label position="fixed">Contact</ion-label>
       <div item-content>
         <span>{{donationRequest.contact}}</span>
       </div>
     </ion-item>
-    <ion-item>
-      <ion-label position="fixed">Amount Raised</ion-label>
-      <div item-content>
-        <span>{{donationRequest.amountRaised}}</span>
-      </div>
-    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">Raised</ion-label>
+          <div item-content>
+            <ion-badge color="success">{{donationRequest.amountRaised}} SDG</ion-badge>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed">Total</ion-label>
+          <div item-content>
+            <ion-badge color="primary">{{donationRequest.totalAmount}} SDG</ion-badge>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-list>
 
-  <ion-button expand="block" color="primary" (click)="open(donationRequest)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
-  <ion-button expand="block" color="danger" (click)="deleteModal(donationRequest)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+  <ion-button *ngIf="donationRequest.amountRaised < donationRequest.totalAmount" expand="block" color="primary"
+    (click)="donate()">{{ 'Donate' | translate }}</ion-button>
 </ion-content>

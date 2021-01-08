@@ -15,28 +15,24 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let donationRequest of donationRequests; trackBy: trackId" #slidingItem>
-      <ion-item (click)="view(donationRequest)">
-        <ion-label text-wrap>
-          <p>{{donationRequest.cause}}</p>
-          <p>{{donationRequest.paymentInfo}}</p>
-          <p>{{donationRequest.info}}</p>
-          <p>{{donationRequest.totalAmount}}</p>
-          <p>{{donationRequest.contact}}</p>
-          <p>{{donationRequest.amountRaised}}</p>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="primary" (click)="edit(slidingItem, donationRequest)">
-          {{ 'EDIT_BUTTON' | translate }}
-        </ion-item-option>
-        <ion-item-option color="danger" (click)="delete(donationRequest)">
-          {{ 'DELETE_BUTTON' | translate }}
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-card *ngFor="let donationRequest of donationRequests; trackBy: trackId">
+    <ion-card-content (click)="view(donationRequest)">
+      <ion-card-title>{{donationRequest.cause}}</ion-card-title>
+      <ion-card-subtitle>{{donationRequest.paymentInfo}}</ion-card-subtitle>
+
+      <ion-row>
+        <ion-col size="6">
+          Raised
+          <ion-badge color="success">{{donationRequest.amountRaised}} SDG</ion-badge>
+        </ion-col>
+        <ion-col size="6">
+          Total
+          <ion-badge color="primary">{{donationRequest.totalAmount}} SDG</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
   <ion-item *ngIf="!donationRequests?.length">
     <ion-label>
       No Donation Requests found.

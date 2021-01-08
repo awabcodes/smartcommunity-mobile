@@ -1,3 +1,39 @@
 <ion-app>
-  <ion-router-outlet dir="auto"></ion-router-outlet>
+  <ion-menu contentId="main">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list lines="none">
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/tabs/need-order" routerLinkActive="active" routerDirection="root">
+            <ion-icon slot="start" name="home-outline"></ion-icon> {{'Orders' | translate}}
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/tabs/donation" routerLinkActive="active" routerDirection="forward">
+            <ion-icon slot="start" name="cart-outline"></ion-icon> {{'Donations' | translate}}
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/tabs/vote" routerLinkActive="active" routerDirection="forward">
+            <ion-icon slot="start" name="bag-handle-outline"></ion-icon> {{'Votes' | translate}}
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-item (click)="logout()">
+          <ion-icon slot="start" name="exit-outline"></ion-icon> {{'logout' | translate}}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+  </ion-menu>
+
+  <ion-router-outlet dir="auto" id="main"></ion-router-outlet>
+
 </ion-app>

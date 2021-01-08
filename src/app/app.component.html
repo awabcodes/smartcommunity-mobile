@@ -10,28 +10,30 @@
       <ion-list lines="none">
         <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/tabs/need-order" routerLinkActive="active" routerDirection="root">
-            <ion-icon slot="start" name="home-outline"></ion-icon> {{'Orders' | translate}}
+            <ion-icon color="primary" slot="start" name="bag-check"></ion-icon> {{'Orders' | translate}}
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/tabs/donation" routerLinkActive="active" routerDirection="forward">
-            <ion-icon slot="start" name="cart-outline"></ion-icon> {{'Donations' | translate}}
+            <ion-icon color="primary" slot="start" name="heart"></ion-icon> {{'Donations' | translate}}
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide="false">
           <ion-item routerLink="/tabs/vote" routerLinkActive="active" routerDirection="forward">
-            <ion-icon slot="start" name="bag-handle-outline"></ion-icon> {{'Votes' | translate}}
+            <ion-icon color="primary" slot="start" name="checkmark-circle"></ion-icon> {{'Votes' | translate}}
           </ion-item>
         </ion-menu-toggle>
 
-        <ion-item (click)="logout()">
-          <ion-icon slot="start" name="exit-outline"></ion-icon> {{'logout' | translate}}
-        </ion-item>
       </ion-list>
     </ion-content>
 
+    <ion-footer>
+      <ion-item (click)="logout()">
+        <ion-icon color="primary" slot="start" name="exit"></ion-icon> {{'logout' | translate}}
+      </ion-item>
+    </ion-footer>
   </ion-menu>
 
   <ion-router-outlet dir="auto" id="main"></ion-router-outlet>

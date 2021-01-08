@@ -8,7 +8,8 @@ export class Poll implements BaseEntity {
     public active?: boolean,
     public createdBy?: string,
     public creationDate?: any,
-    public choices?: PollChoice[]
+    public choices?: PollChoice[],
+    public users?: any[]
   ) {
     this.active = false;
   }

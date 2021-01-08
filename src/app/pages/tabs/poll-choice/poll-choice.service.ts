@@ -9,7 +9,7 @@ import { PollChoice } from './poll-choice.model';
 export class PollChoiceService {
   private resourceUrl = ApiService.API_URL + '/poll-choices';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient) { }
 
   create(pollChoice: PollChoice): Observable<HttpResponse<PollChoice>> {
     return this.http.post<PollChoice>(this.resourceUrl, pollChoice, { observe: 'response' });
@@ -21,6 +21,11 @@ export class PollChoiceService {
 
   find(id: number): Observable<HttpResponse<PollChoice>> {
     return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  getPollChoices(id: number, req?: any): Observable<HttpResponse<PollChoice[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<PollChoice[]>(this.resourceUrl + '/polls/' + id, { params: options, observe: 'response' });
   }
 
   query(req?: any): Observable<HttpResponse<PollChoice[]>> {

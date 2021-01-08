@@ -3,6 +3,7 @@ import { Vote } from './vote.model';
 import { VoteService } from './vote.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { Poll, PollService } from '../poll';
 
 @Component({
   selector: 'page-vote-detail',
@@ -10,17 +11,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VoteDetailPage implements OnInit {
   vote: Vote = {};
+  poll: Poll;
 
   constructor(
     private navController: NavController,
     private voteService: VoteService,
     private activatedRoute: ActivatedRoute,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private pollService: PollService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((response) => {
       this.vote = response.data;
+      this.pollService.findByVote(this.vote.id).subscribe(res => this.poll = res.body);
     });
   }
 

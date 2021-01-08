@@ -23,9 +23,18 @@ export class PollService {
     return this.http.get(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByVote(id: number): Observable<HttpResponse<Poll>> {
+    return this.http.get(`${this.resourceUrl}/votes/${id}`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<HttpResponse<Poll[]>> {
     const options = createRequestOption(req);
     return this.http.get<Poll[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  queryForUser(req?: any): Observable<HttpResponse<Poll[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<Poll[]>(this.resourceUrl + '/user', { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<any>> {

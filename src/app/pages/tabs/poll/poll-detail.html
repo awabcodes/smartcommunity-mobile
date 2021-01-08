@@ -18,12 +18,6 @@
       </div>
     </ion-item>
     <ion-item>
-      <ion-label position="fixed">Active</ion-label>
-      <div item-content>
-        <span>{{poll.active}}</span>
-      </div>
-    </ion-item>
-    <ion-item>
       <ion-label position="fixed">Created By</ion-label>
       <div item-content>
         <span>{{poll.createdBy}}</span>
@@ -35,8 +29,18 @@
         <span>{{poll.creationDate | date:'medium'}}</span>
       </div>
     </ion-item>
+
+    <ion-radio-group (ionChange)="choiceChanged($event)">
+      <ion-item *ngFor="let pollOption of pollChoices;">
+        <ion-label>{{pollOption.choice}}</ion-label>
+        <ion-radio [value]="pollOption" slot="start"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
   </ion-list>
 
-  <ion-button expand="block" color="primary" (click)="open(poll)">{{ 'EDIT_BUTTON' | translate }}</ion-button>
-  <ion-button expand="block" color="danger" (click)="deleteModal(poll)">{{ 'DELETE_BUTTON' | translate }}</ion-button>
+  <div class="ion-text-center">
+    <ion-button [disabled]="!pickedChoice" color="primary" (click)="vote()">
+      <ion-icon slot="start" name="checkmark"></ion-icon> {{'DONE_BUTTON' | translate}}
+    </ion-button>
+  </div>
 </ion-content>

@@ -79,14 +79,7 @@ export class DonationUpdatePage implements OnInit {
     const toast = await this.toastCtrl.create({ message: `Donation ${action} successfully.`, duration: 2000, position: 'middle' });
     toast.present();
 
-    this.updateAmountRaised(response.body.amount);
-
     this.navController.navigateBack('/tabs/donation-request');
-  }
-
-  updateAmountRaised(amount: number) {
-    this.donationRequest.amountRaised += amount;
-    this.donationRequestService.update(this.donationRequest).subscribe();
   }
 
   previousState() {

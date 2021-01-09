@@ -3,6 +3,7 @@ import { BaseEntity } from 'src/model/base-entity';
 export const enum AnnouncementType {
   'NEWS',
   'EVENT',
+  'MARKET',
   'OTHER',
 }
 

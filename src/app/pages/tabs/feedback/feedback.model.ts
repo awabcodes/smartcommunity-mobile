@@ -1,8 +1,11 @@
 import { BaseEntity } from 'src/model/base-entity';
 
 export const enum FeedbackType {
-  'NEGATIVE',
-  'POSITIVE',
+  'SUGGESTION',
+  'COMPLAINT',
+  'WATER_COMPLAINT',
+  'AUTUMN_COMPLAINT',
+  'SECURITY_COMPLAINT'
 }
 
 export const enum FeedbackStatus {

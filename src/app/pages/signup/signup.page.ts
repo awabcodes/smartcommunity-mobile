@@ -12,19 +12,17 @@ export class SignupPage implements OnInit {
   // The account fields for the signup form
   account: {
     login: string;
-    email: string;
     firstName: string;
     lastName: string;
     password: string;
     langKey: string;
   } = {
-    login: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    langKey: 'en',
-  };
+      login: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      langKey: 'en',
+    };
 
   // Our translated text strings
   private signupErrorString: string;
@@ -46,20 +44,20 @@ export class SignupPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   doSignup() {
-    // set login to same as email
-    this.account.login = this.account.email;
     // Attempt to login in through our User service
     this.userService.signup(this.account).subscribe(
       async () => {
         const toast = await this.toastController.create({
           message: this.signupSuccessString,
           duration: 3000,
-          position: 'top',
+          position: 'middle',
         });
         toast.present();
+
+        this.navController.back();
       },
       async (response) => {
         // Unable to sign up

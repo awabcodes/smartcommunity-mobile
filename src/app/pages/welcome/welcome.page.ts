@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-welcome',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
-  constructor() {}
+  constructor(
+    private menu: MenuController,
+  ) {
+    this.menu.enable(false);
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

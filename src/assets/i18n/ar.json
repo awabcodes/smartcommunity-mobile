@@ -52,7 +52,7 @@
   "LOGIN_BUTTON": "تسجيل الدخول",
   "SIGNUP_TITLE": "انشاء الحساب",
   "SIGNUP_ERROR": "تعذر إنشاء الحساب. يرجى التحقق من معلومات حسابك وإعادة المحاولة.",
-  "SIGNUP_SUCCESS": "Registration saved! Please check your email for confirmation.",
+  "SIGNUP_SUCCESS": "Registration saved!",
   "EXISTING_USER_ERROR": "Email is already in use! Please choose another one.",
   "INVALID_PASSWORD_ERROR": "Invalid password, please try again.",
   "SIGNUP_BUTTON": "انشاء الحساب",

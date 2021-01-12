@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Smart Community</string>
+    <string name="title_activity_main">Smart Community</string>
+    <string name="package_name">com.awabcodes.smartcommunity</string>
+    <string name="custom_url_scheme">com.awabcodes.smartcommunity</string>
+</resources>

@@ -15,12 +15,14 @@ export class SignupPage implements OnInit {
     firstName: string;
     lastName: string;
     password: string;
+    email: string;
     langKey: string;
   } = {
       login: '',
       firstName: '',
       lastName: '',
       password: '',
+      email: '',
       langKey: 'en',
     };
 
@@ -48,6 +50,7 @@ export class SignupPage implements OnInit {
 
   doSignup() {
     // Attempt to login in through our User service
+    this.account.email = this.account.login + '@smartcommunity.com';
     this.userService.signup(this.account).subscribe(
       async () => {
         const toast = await this.toastController.create({
